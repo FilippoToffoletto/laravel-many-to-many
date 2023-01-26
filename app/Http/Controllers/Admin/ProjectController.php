@@ -34,7 +34,7 @@ class ProjectController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.projects.list_category_post', compact('categories'));
+        return view('admin.projects.list_category_project', compact('categories'));
     }
 
     /**

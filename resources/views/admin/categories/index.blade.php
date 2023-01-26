@@ -9,7 +9,7 @@
     <h1 class="my-3">Gestione Categorie</h1>
 
     @if (session('message'))
-        <div class="alert alert-succes" role="alert">
+        <div class="alert alert-success" role="alert">
             {{session('message')}}
         </div>
     @endif
@@ -21,6 +21,7 @@
             <div class="input-group mb-3">
                 <input type="text" class="form-control" name="name" placeholder="Nuova Categoria">
                 <button class="btn btn-outline-info" type="submit" id="button-addon2"><i class="fa-solid fa-circle-plus"></i> INVIA</button>
+
             </div>
         </form>
     </div>
@@ -36,18 +37,17 @@
             @foreach ($categories as $category)
                 <tr>
                     <td>
-                        <form action="{{route('admin.categories.update', $category)}}">
+                        <form action="{{route('admin.categories.update', $category)}}" method="POST" class="">
                             @csrf
                             @method('patch')
-                            <input type="text" class="border-0" name="name" value="{{$category->name}}">
+                            <input type="text" value="{{$category->name}}" class="border-0" name="name">
                             <button type="submit" class="btn btn-warning">UPDATE</button>
-
                             <form
-                            onsubmit="return confirm('Confermi l\'eliminazione del post?')"
-                            action="{{route('admin.projects.destroy', $category)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button href="{{route('admin.projects.edit', $category)}}" type="submit" class="btn btn-danger">DELETE</button>
+                                onsubmit="return confirm('Confermi l\'eliminazione del post?')"
+                                action="{{route('admin.categories.destroy', $category)}}" method="POST" class="">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button href="{{route('admin.categories.destroy', $category)}}" type="submit" class="btn btn-danger">DELETE</button>
                             </form>
                         </form>
                     </td>

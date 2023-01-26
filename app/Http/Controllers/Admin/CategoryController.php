@@ -93,7 +93,7 @@ class CategoryController extends Controller
 
         $category->update($val_data);
 
-        return redirect()->back()->with('message', "Categoria $request->name creata correttamente");
+        return redirect()->back()->with('message', "Categoria $request->name aggiornata correttamente");
     }
 
     /**
