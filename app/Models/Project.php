@@ -17,6 +17,9 @@ class Project extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+    public function technology(){
+        return $this->belongsToMany(Technology::class);
+    }
 
     public static function generateSlug($string){
         $slug = Str::slug($string, '-');
