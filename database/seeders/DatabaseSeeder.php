@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             [
                 ProjectSeeder::class,
                 CategoryTableSeeder::class,
-                ProjectCategorySeeder::class
+                ProjectCategorySeeder::class,
             ]
         );
     }
