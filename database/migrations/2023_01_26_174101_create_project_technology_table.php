@@ -32,7 +32,7 @@ return new class extends Migration
             //2. creo la fk per questa colonna
             $table->foreign('technology_id')
                 ->references('id')
-                ->on('technology')
+                ->on('technologies')
                 ->cascadeOnDelete();
 
 

@@ -51,6 +51,26 @@
             </select>
         </div>
 
+
+        {{-- TAGS --}}
+        <div class="mb-3">
+            <p for="client_name" class="form-label">Categoria</p>
+            @foreach ($technologies as $technology)
+                <input
+                type="checkbox"
+                id="technology{{$loop->iteration}}"
+                name="technologies[]"
+                value="{{$technology->id}}"
+                @if (!errors->all() && $project->technologies->contains($technology))
+                    checked
+                @elseif (errors->all() && in_array($technology->id, old('technologies',[])))
+                    checked
+                @endif>
+                <label class="me-2" for="technology{{$loop->iteration}}">{{$technology->name}}</label>
+            @endforeach
+        </div>
+
+
         <div class="mb-3">
             <label for="cover_image" class="form-label">URL Immagine</label>
             <input type="text" class="form-control @error('cover_image') is-invalid @enderror" id="cover_image" name="cover_image" value="{{old('cover_image',$project->cover_image)}}" placeholder="URL IMMAGINE">

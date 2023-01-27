@@ -7,6 +7,7 @@ use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Category;
 use App\Models\Project;
+use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -33,7 +34,6 @@ class ProjectController extends Controller
     public function categories_project(){
 
         $categories = Category::all();
-
         return view('admin.projects.list_category_project', compact('categories'));
     }
 
@@ -45,7 +45,8 @@ class ProjectController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.projects.create', compact('categories'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('categories','technologies'));
     }
 
     /**
@@ -73,6 +74,10 @@ class ProjectController extends Controller
         $new_project->save();*/
         $new_project = Project::create($project_data);
 
+        if(array_key_exists('technologies', $project_data)){
+            $new_project->technologies()->attach($project_data['technlogies']);
+        }
+
         return redirect()->route('admin.projects.show', $new_project)->with('message','Progetto inserito correttamente');
     }
 
@@ -96,7 +101,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $categories = Category::all();
-        return view('admin.projects.edit', compact('project', 'categories'));
+        $technologies= Technology::all();
+        return view('admin.projects.edit', compact('project', 'categories','technologies'));
     }
 
     /**
@@ -116,6 +122,14 @@ class ProjectController extends Controller
         }
 
         $project->update($project_data);
+
+        if(array_key_exists('technologies', $project_data)){
+            $project->technologies()->sync($project_data['technologies']);
+        }else{
+            $project->technologies()->detach();
+        }
+
+
         return redirect()->route('admin.projects.show', $project)->with('message','Progetto aggioraneto correttamente');
 
     }

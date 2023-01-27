@@ -27,7 +27,9 @@ class ProjectsTechnologyTableSeeder extends Seeder
             //inserisco il dato nella tabella ponte
             //con attach viene inserita la relazione nrlla tabella ponte
             //al metodo attach posso passare un singolo ID o un array di un ID
-            $project->tags()->attach($technology_id);
+
+            // errore
+            $project->technologies()->attach($technology_id);
         }
     }
 }

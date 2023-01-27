@@ -22,14 +22,25 @@
         <h4>Categoria: {{$project->category->name}}</h4>
     @endif
 
-    @if ($project->cover_image)
-        <div>
-            <img src="{{asset('storage/' . $project->image)}}" alt="{{$project->cover_image_original}}">
-            <p><i>{{$project->cover_image_original}}</i></p>
-        </div>
+    @if ($project->technologies )
+        @foreach ($project->technologies as $technology)
+            <span class="badge text-bg-primary">{{$technology->name}}</span>
+        @endforeach
     @endif
 
+    @if ($project->cover_image)
+        <div>
+            <img src="{{asset('storage/'. $project->cover_image)}}" alt="{{$project->cover_image_original}}">
+            <p><i>{{$project->cover_image_original}}</i></p>
+        </div>
+    @else
+        <div>
+            <img src="https://www.labfriend.com.au/static/assets/images/shared/default-image.png" alt="">
+        </div>
+    @endif
     <img src="{{$project->cover_image}}" alt="{{$project->name}}">
+
+
 
     <p>{{$project->summary}}</p>
 

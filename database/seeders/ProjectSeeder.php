@@ -24,7 +24,7 @@ class ProjectSeeder extends Seeder
             $new_project->slug = Project::generateSlug($new_project->title);
             $new_project->client_name = $faker->sentence(5);
             $new_project->summary = $faker->text();
-            $new_project->cover_image = 'https://www.labfriend.com.au/static/assets/images/shared/default-image.png';
+            $new_project->cover_image = '';
             //dump($new_project);
             $new_project->save();
         }

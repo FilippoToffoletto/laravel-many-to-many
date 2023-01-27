@@ -20,6 +20,13 @@ return new class extends Migration
                     ->references('id')
                     ->on('categories')
                     ->onDelete('set null');
+
+            $table->unsignedBigInteger('user_id')->nullable()->after('id');
+
+            $table->foreign('user_id')
+                 ->references('id')
+                 ->on('users')
+                    ->onDelete('set null');
         });
     }
 

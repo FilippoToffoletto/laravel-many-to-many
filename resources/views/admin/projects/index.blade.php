@@ -21,8 +21,9 @@
           <tr>
             <th scope="col"><a href="{{route('admin.projects.orderby', ['id', $direction])}}">ID</a></th>
             <th scope="col"><a href="{{route('admin.projects.orderby', ['name', $direction])}}">Nome Progetto</a></th>
+            <th scope="col">Tecnologie</th>
             <th scope="col"><a href="{{route('admin.projects.orderby', ['client_name', $direction])}}">Nome Cliente</a></th>
-            <th scope="col"><a href="{{route('admin.projects.orderby', ['summary', $direction])}}">Descrizione</a></th>
+            <!--<th scope="col"><a href="{{route('admin.projects.orderby', ['summary', $direction])}}">Descrizione</a></th>-->
             <th scope="col">Azioni</th>
           </tr>
         </thead>
@@ -32,8 +33,15 @@
             <td>{{$project->id}}</td>
             <td>{{$project->name}} <span class="badge rounded-pill text-bg-info">{{$project->category?->name}}</span>
                 </td>
+            <td>
+                @forelse ($project->technologies as $technology)
+                    <span class="badge text-bg-primary">{{$technology->name}}</span>
+                @empty
+                    - no data -
+                @endforelse
+            </td>
             <td>{{$project->client_name}}</td>
-            <td>{{$project->summary}}</td>
+            <!--<td>{{$project->summary}}</td>-->
             <td class="ft-action-btn">
                 <a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                 <a href="{{route('admin.projects.edit', $project)}}" class="btn btn-warning"><i class="fa-solid fa-pencil"></i></a>
