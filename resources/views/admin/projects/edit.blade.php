@@ -61,9 +61,9 @@
                 id="technology{{$loop->iteration}}"
                 name="technologies[]"
                 value="{{$technology->id}}"
-                @if (!errors->all() && $project->technologies->contains($technology))
+                @if (!$errors->all() && $project->technologies->contains($technology))
                     checked
-                @elseif (errors->all() && in_array($technology->id, old('technologies',[])))
+                @elseif (!$errors->all() && in_array($technology->id, old('technologies',[])))
                     checked
                 @endif>
                 <label class="me-2" for="technology{{$loop->iteration}}">{{$technology->name}}</label>
